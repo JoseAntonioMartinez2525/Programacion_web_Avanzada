@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uso de fillRect y fillStyle</title>
+    <style>
+        .canvasContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #myCanvas {
+            border: 1px solid black;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="canvasContainer">
+        <canvas width="500" height="500" id="myCanvas"></canvas>
+    </div>
+
+    <script>
+        var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext('2d');
+        let w = 55; let h = 55; let x = 20; let y = 20;
+
+        // borde del canvas
+        ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+        //figuras
+        //cuadro 1
+        ctx.fillStyle = "#8687E1";
+        ctx.fillRect(x, y, w, h);
+
+        //cuadro 2
+        ctx.fillStyle = "#C73636";
+        ctx.fillRect(x+40, y+40, w, h);
+
+        //cuadro 3
+        ctx.fillStyle = "rgba(232, 85, 235, 0.5)"; // Color con transparencia
+        ctx.fillRect(x+80, y+80, w, h);
+
+    </script>
+</body>
+
+</html>
