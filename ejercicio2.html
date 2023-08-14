@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uso de moveTo, lineTo y Stroke</title>
+    <style>
+        .canvasContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #myCanvas {
+            border: 1px solid black;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="canvasContainer">
+        <canvas width="500" height="500" id="myCanvas"></canvas>
+    </div>
+
+    <script>
+        var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext('2d');
+
+        // Linea
+        var startX = 300;
+        var startY = 50;
+        var endX = 400;
+        var endY = 150;
+
+        ctx.moveTo(startX, startY);
+        ctx.lineTo(endX, endY);
+        ctx.stroke();
+
+        // Triangulo debajo de la linea
+        var triangleBase = 100; // base del triángulo
+        var triangleHeight = 50; // altura del triángulo
+
+        var triangleX = (startX + endX - triangleBase) / 2;
+        var triangleY = endY + 10;
+
+        ctx.beginPath();
+        ctx.moveTo(triangleX, triangleY); // Vértice A
+        ctx.lineTo(triangleX + triangleBase, triangleY); // Vértice B
+        ctx.lineTo(startX + (endX - startX) / 2, triangleY + triangleHeight); // Vértice C
+        ctx.closePath();
+
+        ctx.fillStyle = "rgba(255, 105, 180, 0.5)"; // Color rosa translúcido
+        ctx.fill();
+
+        ctx.fillText(triangleX - 5, triangleY - 5);
+        ctx.fillText(triangleX + triangleBase + 5, triangleY - 5);
+        ctx.fillText(startX + (endX - startX) / 2, triangleY + triangleHeight + 15);
+    </script>
+</body>
+
+</html>
