@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utiliza font, fillText y strokeText para dibujar un texto dentro del Canvas.</title>
+    <style>
+        .canvasContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #myCanvas {
+            border: 1px solid black;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="canvasContainer">
+        <canvas width="500" height="500" id="myCanvas"></canvas>
+    </div>
+    <script>
+        var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext('2d');
+        let w = 55; let h = 55; let x = 20; let y = 20;
+
+        //figuras
+        //cuadro 1
+        ctx.fillStyle = "#8687E1";
+        ctx.fillRect(x, y, w, h);
+
+        //cuadro 2
+        ctx.fillStyle = "#C73636";
+        ctx.fillRect(x + 40, y + 40, w, h);
+
+        //cuadro 3
+        ctx.fillStyle = "rgba(36, 113, 163, 0.5)"; // Color con transparencia
+        ctx.fillRect(x + 80, y + 80, w, h);
+
+        //cuadro 4
+        ctx.stroke();
+        ctx.strokeRect(x + 120, y + 120, w, h);
+
+        //triangulo
+        ctx.beginPath();
+        ctx.moveTo(x + 400, y+100); // Punto superior
+        ctx.lineTo(x + 380, y + h+100); // Punto inferior derecho
+        ctx.lineTo(x + 310, y + h+100); // Punto inferior izquierdo
+        ctx.closePath();
+        ctx.fillStyle = "#2ECC71";
+        ctx.fill();
+
+
+        //Circulos
+        ctx.beginPath();
+        ctx.fillStyle = "cyan";
+        ctx.arc(200, 300, 50, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.arc(250, 300, 50, 1, 3 * Math.PI);
+        ctx.stroke();
+        ctx.closePath();
+
+        //Texto
+        ctx.fillStyle = "#55B9EB";
+        ctx.font = "40px Georgia";
+        ctx.fillText("Escribe", 150, 50);
+
+        ctx.fillStyle = "#D35400";
+        ctx.font = "40px Arial";
+        ctx.fillText("aquí", 300, 50);
+
+        ctx.strokeStyle = "#CB55EB"; 
+        ctx.strokeText("aquí", 302, 50);
+    
+    
+
+    </script>
+
+</body>
+
+</html>
