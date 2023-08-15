@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>drawImage</title>
+    <style>
+        .canvasContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        #myCanvas {
+            border: 1px solid black;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="canvasContainer">
+        <canvas width="500" height="500" id="myCanvas"></canvas>
+    </div>
+
+    <img src="./src/img/dragon.png" id="my_img" style="display: none;" alt="">
+    <script>
+        var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext('2d');
+        var img = document.getElementById("my_img");
+        ctx.drawImage(img, 60, 100, 400, 400);
+
+    </script>
+
+</body>
+
+</html>
