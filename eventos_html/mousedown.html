@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dibujar Círculo con mousedown</title>
+    <style>
+        .canvasContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #myCanvas {
+            border: 1px solid black;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body style="background-color: black;">
+    <div class="canvasContainer">
+        <canvas width="500" height="500" id="myCanvas"></canvas>
+    </div>
+
+    <script>
+        var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext('2d');
+
+        // Agregar el listener para el evento mousedown
+        canvas.addEventListener('mousedown', function (event) {
+
+            var x = event.offsetX; // Posición x del clic al canvas
+            var y = event.offsetY; // Posición y del clic al canvas
+
+            // Dibujar un círculo en la posición del clic
+            ctx.beginPath();
+            ctx.arc(x, y, 30, 0, Math.PI * 2); // x, y, radio, ángulo inicial, ángulo final
+            ctx.fillStyle = 'rgba(116, 199, 246, 0.5)'; // Color del círculo
+            ctx.fill(); // Rellenar el círculo
+            ctx.stroke();
+            ctx.closePath();
+        });
+    </script>
+</body>
+
+</html>
