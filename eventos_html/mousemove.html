@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figura Cambiante con Estela</title>
+    <style>
+        .canvasContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #myCanvas {
+            border: 1px solid black;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body style="background-color: black;">
+    <div class="canvasContainer">
+        <canvas id="myCanvas" width="500" height="500"></canvas>
+    </div>
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const context = canvas.getContext('2d');
+
+        const shapes = [];
+        let isDrawing = false;
+
+        // Registra el movimiento del cursor
+        canvas.addEventListener('mousemove', (event) => {
+            if (isDrawing) {
+                const x = event.clientX - canvas.offsetLeft;
+                const y = event.clientY - canvas.offsetTop;
+                shapes.push({ x, y });
+                draw();
+            }
+        });
+
+        // Inicia el dibujo
+        canvas.addEventListener('mousedown', () => {
+            isDrawing = true;
+        });
+
+        // Detiene el dibujo
+        canvas.addEventListener('mouseup', () => {
+            isDrawing = false;
+        });
+
+        // Dibuja la estela
+        function draw() {
+            context.fillStyle = 'black';
+            for (const shape of shapes) {
+                context.beginPath();
+                context.arc(shape.x, shape.y, 2, 0, Math.PI * 2);
+                context.fill();
+                context.closePath();
+            }
+        }
+
+        // figuras aleatorias al hacer clic
+        canvas.addEventListener('click', (event) => {
+            const size = Math.random() * 50 + 20;
+            const x = event.clientX - canvas.offsetLeft;
+            const y = event.clientY - canvas.offsetTop;
+            const color = getRandomColor();
+            context.fillStyle = color;
+            context.beginPath();
+            if (Math.random() < 0.5) {
+                context.fillRect(x - size / 2, y - size / 2, size, size);
+            } else {
+                context.arc(x, y, size / 2, 0, Math.PI * 2);
+                context.fill();
+            }
+            context.closePath();
+        });
+
+        // Genera un color aleatorio
+        function getRandomColor() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            const a = 0.5;
+            return `rgba(${r},${g},${b},${a})`;
+        }
+
+    </script>
+</body>
+
+</html>
