@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar Color de Círculo con mouseover</title>
+    <style>
+        .canvasContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #myCanvas {
+            border: 1px solid black;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body style="background-color: black;">
+    <div class="canvasContainer">
+        <canvas width="500" height="500" id="myCanvas"></canvas>
+    </div>
+
+    <script>
+        var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext('2d');
+
+        var circleColor = 'rgba(116, 199, 246, 0.5)';
+
+        // Función para dibujar un círculo en una posición dada
+        function drawCircle(x, y) {
+            ctx.beginPath();
+            ctx.arc(x, y, 30, 0, Math.PI * 2); // x, y, radio, ángulo inicial, ángulo final
+            ctx.fillStyle = circleColor;
+            ctx.fill(); 
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+        // mouseover en el documento
+        document.addEventListener('mouseover', function (event) {
+
+            var centerX = canvas.width / 2;
+            var centerY = canvas.height / 2;
+
+            // Si el evento ocurrió dentro del canvas, cambia el color del círculo
+            if (event.target === canvas) {
+                circleColor = 'rgba(' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ', 0.5)';
+                drawCircle(event.offsetX, event.offsetY);
+            }
+        });
+
+        // evento mousedown en el canvas
+        canvas.addEventListener('mousedown', function (event) {
+            // Dibujar el círculo en la posición del clic con el color actual
+            drawCircle(event.offsetX, event.offsetY);
+        });
+
+        // Dibujar el círculo inicialmente al cargar la página en el centro del canvas
+        var initialX = canvas.width / 2;
+        var initialY = canvas.height / 2;
+        drawCircle(initialX, initialY);
+    </script>
+</body>
+
+</html>
