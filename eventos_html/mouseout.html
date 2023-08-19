@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figura Cambiante</title>
+    <style>
+        .canvasContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #myCanvas {
+            border: 1px solid black;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body style="background-color: black;">
+    <div class="canvasContainer">
+        <canvas id="myCanvas" width="500" height="500"></canvas>
+    </div>
+
+    <script>
+        const canvas = document.getElementById("myCanvas");
+        const ctx = canvas.getContext("2d");
+
+        let lastX, lastY;
+        let currentShape = "circle"; // Inicialmente se dibuja un círculo
+        const shapeSize = 50; // Tamaño de las figuras
+        const borderColor = "black"; 
+
+        function drawCircle(x, y, radius, color) {
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, 2 * Math.PI);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.strokeStyle = borderColor; 
+            ctx.stroke(); 
+            ctx.closePath();
+        }
+
+        function drawSquare(x, y, size, color) {
+            const halfSize = size / 2;
+            ctx.fillStyle = color;
+            ctx.fillRect(x - halfSize, y - halfSize, size, size);
+            ctx.strokeStyle = borderColor; 
+            ctx.strokeRect(x - halfSize, y - halfSize, size, size); 
+        }
+
+        // Dibujar un círculo inicial al cargar la página
+        const initialX = canvas.width / 2;
+        const initialY = canvas.height / 2;
+        const initialColor = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)},0.5)`;
+        drawCircle(initialX, initialY, shapeSize, initialColor);
+
+        canvas.addEventListener("click", (event) => {
+            const x = event.offsetX;
+            const y = event.offsetY;
+            const randomColor = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)},0.5)`;
+
+            if (currentShape === "circle") {
+                drawCircle(x, y, shapeSize, randomColor);
+                lastX = x;
+                lastY = y;
+                currentShape = "square";
+            } else if (currentShape === "square") {
+                drawSquare(x, y, shapeSize * 1.8, randomColor);
+                lastX = x;
+                lastY = y;
+                currentShape = "circle";
+            }
+        });
+
+        canvas.addEventListener("mouseout", () => {
+            if (lastX !== undefined && lastY !== undefined) {
+                const randomColor = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)},0.5)`;
+                if (currentShape === "circle") {
+                    drawCircle(lastX, lastY, shapeSize, randomColor);
+                } else if (currentShape === "square") {
+                    drawSquare(lastX, lastY, shapeSize * 2, randomColor);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
