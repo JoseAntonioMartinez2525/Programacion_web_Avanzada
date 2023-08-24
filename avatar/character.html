@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personaje en Canvas</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="500" height="800"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Ajustar posición vertical
+        const offsetY = 100;
+
+        // Dibujar el fondo de la cabeza con degradado lineal
+        const headGradient = ctx.createLinearGradient(150, offsetY + 60, 150, offsetY + 230);
+        headGradient.addColorStop(0, "black");
+        headGradient.addColorStop(1, "black");
+        ctx.fillStyle = headGradient;
+        ctx.fillRect(100, offsetY + 60, 100, 170);
+
+        // Dibujar la capucha
+        ctx.fillStyle = "#222";
+        ctx.beginPath();
+        ctx.moveTo(100, offsetY + 60);
+        ctx.lineTo(200, offsetY + 60);
+        ctx.quadraticCurveTo(150, offsetY, 100, offsetY + 60);
+        ctx.fill();
+
+        // Dibujar la túnica 
+        const tunicGradient = ctx.createLinearGradient(150, offsetY + 230, 150, offsetY + 300);
+        tunicGradient.addColorStop(0, "black");
+        tunicGradient.addColorStop(1, "#2F2D30");
+        ctx.fillStyle = tunicGradient;
+        ctx.fillRect(100, offsetY + 230, 100, 70);
+
+        // Dibujar la máscara 
+        const maskGradient = ctx.createRadialGradient(150, offsetY + 120, 40, 150, offsetY + 120, 60);
+        maskGradient.addColorStop(0, "#E2D8E3");
+        maskGradient.addColorStop(1, "#F4E9F5");
+        ctx.fillStyle = maskGradient;
+        ctx.beginPath();
+        ctx.ellipse(150, offsetY + 120, 60, 80, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Dibujar los ojos 
+        ctx.fillStyle = "black";
+        ctx.beginPath();
+        ctx.ellipse(135, offsetY + 105, 8, 6, 0, 0, Math.PI * 2);
+        ctx.ellipse(165, offsetY + 105, 8, 6, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Detalles en la boca 
+        ctx.fillStyle = "black";
+        ctx.beginPath();
+        ctx.ellipse(150, offsetY + 160, 12, 8, 0, 0, Math.PI * 2);
+        ctx.fill();
+    </script>
+</body>
+
+</html>
