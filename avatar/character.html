@@ -23,7 +23,7 @@
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
 
-        // Ajustar posición vertical
+        //ajuste de posición vertical
         const offsetY = 100;
 
         // Dibujar el fondo de la cabeza con degradado lineal
@@ -41,15 +41,21 @@
         ctx.quadraticCurveTo(150, offsetY, 100, offsetY + 60);
         ctx.fill();
 
-        // Dibujar la túnica 
-        const tunicGradient = ctx.createLinearGradient(150, offsetY + 230, 150, offsetY + 300);
+        // Dibujar la túnica
+        const tunicGradient = ctx.createLinearGradient(170, offsetY + 230, 170, offsetY + 300);
         tunicGradient.addColorStop(0, "black");
         tunicGradient.addColorStop(1, "#2F2D30");
         ctx.fillStyle = tunicGradient;
-        ctx.fillRect(100, offsetY + 230, 100, 70);
+        ctx.beginPath();
+        ctx.moveTo(100, offsetY + 230);
+        ctx.lineTo(270, offsetY + 230);
+        ctx.lineTo(180, offsetY + 400);
+        ctx.lineTo(120, offsetY + 400);
+        ctx.closePath();
+        ctx.fill();
 
         // Dibujar la máscara 
-        const maskGradient = ctx.createRadialGradient(150, offsetY + 120, 40, 150, offsetY + 120, 60);
+        const maskGradient = ctx.createRadialGradient(150, offsetY + 170, 40, 150, offsetY + 120, 60);
         maskGradient.addColorStop(0, "#E2D8E3");
         maskGradient.addColorStop(1, "#F4E9F5");
         ctx.fillStyle = maskGradient;
@@ -60,14 +66,50 @@
         // Dibujar los ojos 
         ctx.fillStyle = "black";
         ctx.beginPath();
-        ctx.ellipse(135, offsetY + 105, 8, 6, 0, 0, Math.PI * 2);
-        ctx.ellipse(165, offsetY + 105, 8, 6, 0, 0, Math.PI * 2);
+        ctx.ellipse(120, offsetY + 105, 10, 4, 0, 0, Math.PI * 2);
+        ctx.ellipse(180, offsetY + 105, 10, 4, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+    // Triángulo arriba del ojo izquierdo
+        ctx.fillStyle = "#8240A0";
+        ctx.beginPath();
+        ctx.moveTo(110, offsetY + 100);
+        ctx.lineTo(120, offsetY + 95);
+        ctx.lineTo(130, offsetY + 100);
+        ctx.closePath();
+        ctx.fill();
+
+        // Triángulo arriba del ojo derecho
+        ctx.fillStyle = "#8240A0";
+        ctx.beginPath();
+        ctx.moveTo(170, offsetY + 100);
+        ctx.lineTo(180, offsetY + 95);
+        ctx.lineTo(190, offsetY + 100);
+        ctx.closePath();
+        ctx.fill();
+        // Triángulo abajo del  ojo izquierdo
+        ctx.fillStyle = "#8240A0";
+
+        ctx.beginPath();
+        ctx.moveTo(120, offsetY + 119);
+        ctx.lineTo(115, offsetY + 113);
+        ctx.lineTo(125, offsetY + 113);
+        ctx.closePath();
+        ctx.fill();
+
+        // Triángulo abajo del ojo derecho
+        ctx.fillStyle = "#8240A0";
+        ctx.beginPath();
+        ctx.moveTo(180, offsetY + 119);
+        ctx.lineTo(175, offsetY + 113);
+        ctx.lineTo(185, offsetY + 113);
+        ctx.closePath();
         ctx.fill();
 
         // Detalles en la boca 
         ctx.fillStyle = "black";
         ctx.beginPath();
-        ctx.ellipse(150, offsetY + 160, 12, 8, 0, 0, Math.PI * 2);
+        ctx.ellipse(150, offsetY + 160, 16, 4, 0, 0, Math.PI * 2);
         ctx.fill();
     </script>
 </body>
