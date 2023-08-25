@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paisaje en canvas</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+    </style>
+</head>
+<body>
+        <canvas id="canvas" width="500" height="500"></canvas>
+        
+        <script>
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+
+            // degradado horizontal para el mar
+            const marGradient = ctx.createLinearGradient(0, 200, 0, canvas.height);
+            marGradient.addColorStop(0, "#2E3B66");
+            marGradient.addColorStop(1, "#334B9F");
+
+            //mar
+            ctx.fillStyle = marGradient;
+            ctx.fillRect(0, 200, canvas.width, (canvas.height)/2);
+
+
+            //degradado horizontal para el puente
+            const puenteGradient = ctx.createLinearGradient(0, 150, 150, 380);
+            puenteGradient.addColorStop(0, "#DC7633");
+            puenteGradient.addColorStop(1, "#F8C471");
+           
+            //puente
+            ctx.fillStyle = puenteGradient;
+            ctx.fillRect(200, 300, 100, 150);
+    
+        </script>
+</body>
+</html>
