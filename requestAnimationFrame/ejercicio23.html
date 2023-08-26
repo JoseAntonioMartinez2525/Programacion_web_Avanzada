@@ -44,15 +44,24 @@
     let squareY = canvas.height / 2 - squareSize / 2;
     let directionX = 0;
     let directionY = 0;
+    let isFigureOutsideCanvas = false; // rastrear si la figura está fuera del canvas
 
     function moveSquare() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+         if (squareX < 0 || squareX + squareSize > canvas.width || squareY < 0 || squareY + squareSize > canvas.height) {
+            isFigureOutsideCanvas = true; // La figura está fuera del canvas
+        } else {
+            isFigureOutsideCanvas = false; // La figura está dentro del canvas
+        }
+
         squareX += directionX;
         squareY += directionY;
 
-        //ctx.fillStyle = randomRgbColor();
-        ctx.fillRect(squareX, squareY, squareSize, squareSize);
+        
+         if (!isFigureOutsideCanvas) {
+            ctx.fillRect(squareX, squareY, squareSize, squareSize);
+        }
 
         
         window.requestAnimationFrame(moveSquare);
