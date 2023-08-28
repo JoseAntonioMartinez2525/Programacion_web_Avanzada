@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mover una figura de forma natural hacia la última dirección presionada y aumentar la velocidad de desplazamiento al presionar el espacio</title>
+    <style>
+        .canvasContainer {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #canvas {
+            border: 1px solid black;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="canvasContainer">
+        <canvas id="canvas" width="500" height="450"></canvas>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        const squareSize = 50;
+        let squareX = canvas.width / 2 - squareSize / 2;
+        let squareY = canvas.height / 2 - squareSize / 2;
+        let directionX = 0;
+        let directionY = 0;
+        let speed = 2; // Velocidad de movimiento normal
+
+        function moveSquare() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+
+            squareX += directionX * speed;
+            squareY += directionY * speed;
+
+            // si supera los límites
+            if (squareX > canvas.width) {
+                squareX = 0;
+            } else if (squareX + squareSize < 0) {
+                squareX = canvas.width - squareSize;
+            }
+
+            if (squareY > canvas.height) {
+                squareY = 0;
+            } else if (squareY + squareSize < 0) {
+                squareY = canvas.height - squareSize;
+            }
+
+            ctx.fillRect(squareX, squareY, squareSize, squareSize);
+
+            window.requestAnimationFrame(moveSquare);
+        }
+
+        document.addEventListener('keydown', (event) => {
+            switch (event.key) {
+                case 'ArrowLeft':
+                    directionX = -1;
+                    directionY = 0;
+                    ctx.fillStyle = randomRgbColor();
+                    break;
+                case 'ArrowRight':
+                    directionX = 1;
+                    directionY = 0;
+                    ctx.fillStyle = randomRgbColor();
+                    break;
+                case 'ArrowUp':
+                    directionX = 0;
+                    directionY = -1;
+                    ctx.fillStyle = randomRgbColor();
+                    break;
+                case 'ArrowDown':
+                    directionX = 0;
+                    directionY = 1;
+                    ctx.fillStyle = randomRgbColor();
+                    break;
+                case ' ': 
+                    speed = 10; // Aumentar la velocidad al presionar la barra espaciadora
+                    break;
+            }
+        });
+
+        document.addEventListener('keyup', (event) => {
+            if (event.key === ' ') {
+                speed = 2; // Restaurar la velocidad normal al soltar la barra espaciadora
+            }
+            directionX = 0;
+            directionY = 0;
+        });
+
+        // Iniciar la animación
+        window.requestAnimationFrame(moveSquare);
+
+        function randomRgbColor() {
+            let r = randomInteger(255);
+            let g = randomInteger(255);
+            let b = randomInteger(255);
+            return "rgba(" + r + "," + g + "," + b + ",0.5)";
+        }
+
+        function randomInteger(max) {
+            return Math.floor(Math.random() * (max + 1));
+        }
+    </script>
+</body>
+
+</html>
