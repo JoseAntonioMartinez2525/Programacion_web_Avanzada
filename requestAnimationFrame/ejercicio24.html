@@ -4,14 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mover una figura de forma natural hacia la última dirección presionada</title>
+    <title>Mover una figura de forma natural hacia la última dirección presionada y si supera el límite que regrese por el otro extremo</title>
     <style>
         .canvasContainer {
             margin-top: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-
         }
 
         #canvas {
@@ -27,17 +26,6 @@
     </div>
 
     <script>
-
-        // Definición de la función requestAnimationFrame
-        window.requestAnimationFrame = (function () {
-            return window.requestAnimationFrame ||
-                window.webkitRequestAnimationFrame ||
-                window.mozRequestAnimationFrame ||
-                function (callback) {
-                    window.setTimeout(callback, 17);
-                };
-        })();
-
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
 
@@ -46,25 +34,27 @@
         let squareY = canvas.height / 2 - squareSize / 2;
         let directionX = 0;
         let directionY = 0;
-        let isFigureOutsideCanvas = false; // rastrear si la figura está fuera del canvas
 
         function moveSquare() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            if (squareX < 0 || squareX + squareSize > canvas.width || squareY < 0 || squareY + squareSize > canvas.height) {
-                isFigureOutsideCanvas = true; // La figura está fuera del canvas
-            } else {
-                isFigureOutsideCanvas = false; // La figura está dentro del canvas
-            }
-
             squareX += directionX;
             squareY += directionY;
 
-
-            if (!isFigureOutsideCanvas) {
-                ctx.fillRect(squareX, squareY, squareSize, squareSize);
+            // si supera los límites
+            if (squareX > canvas.width) {
+                squareX = 0;
+            } else if (squareX + squareSize < 0) {
+                squareX = canvas.width - squareSize;
             }
 
+            if (squareY > canvas.height) {
+                squareY = 0;
+            } else if (squareY + squareSize < 0) {
+                squareY = canvas.height - squareSize;
+            }
+
+            ctx.fillRect(squareX, squareY, squareSize, squareSize);
 
             window.requestAnimationFrame(moveSquare);
         }
@@ -94,15 +84,13 @@
             }
         });
 
-
         document.addEventListener('keyup', () => {
             directionX = 0;
             directionY = 0;
         });
 
-        // animación 
+        // Iniciar la animación
         window.requestAnimationFrame(moveSquare);
-
 
         function randomRgbColor() {
             let r = randomInteger(255);
@@ -114,10 +102,7 @@
         function randomInteger(max) {
             return Math.floor(Math.random() * (max + 1));
         }
-
-
     </script>
-
 </body>
 
 </html>
