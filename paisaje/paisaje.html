@@ -26,6 +26,18 @@
         marGradient.addColorStop(0, "#2E3B66");
         marGradient.addColorStop(1, "#334B9F");
 
+        // Degradado radial para el cielo
+        const skyGradient = ctx.createRadialGradient(
+            canvas.width / 2, canvas.height / 2, 0,
+            canvas.width / 2, canvas.height / 2, canvas.height / 2
+        );
+        skyGradient.addColorStop(0, "#EAF2F8"); // Color de menor intensidad
+        skyGradient.addColorStop(1, "#85C1E9"); // Color de mayor intensidad
+
+        //cielo
+        ctx.fillStyle = skyGradient;
+        ctx.fillRect(0, 20, canvas.width, (canvas.height) / 2);
+
         //mar
         ctx.fillStyle = marGradient;
         ctx.fillRect(0, 200, canvas.width, (canvas.height)/2);
@@ -53,12 +65,12 @@
         ctx.closePath();
         ctx.fill();
 
-        //degradado horizontal para el puente
-        const puenteGradient = ctx.createLinearGradient(100, 150, 150, 380);
-        puenteGradient.addColorStop(0, "#C46323");
-        puenteGradient.addColorStop(1, "#D69A2A");
-        
-        //puente
+        // Degradado lineal inclinado para el puente
+        const puenteGradient = ctx.createLinearGradient(210, 300, 300, 450);
+        puenteGradient.addColorStop(0, "#C46323"); // Color de menor intensidad
+        puenteGradient.addColorStop(1, "#D69A2A"); // Color de mayor intensidad
+
+        // puente
         ctx.fillStyle = puenteGradient;
         ctx.fillRect(210, 300, 90, 150);
 
