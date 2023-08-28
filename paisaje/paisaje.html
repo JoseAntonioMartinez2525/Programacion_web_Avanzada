@@ -15,31 +15,129 @@
     </style>
 </head>
 <body>
-        <canvas id="canvas" width="500" height="500"></canvas>
-        
-        <script>
-            const canvas = document.getElementById('canvas');
-            const ctx = canvas.getContext('2d');
-
-            // degradado horizontal para el mar
-            const marGradient = ctx.createLinearGradient(0, 200, 0, canvas.height);
-            marGradient.addColorStop(0, "#2E3B66");
-            marGradient.addColorStop(1, "#334B9F");
-
-            //mar
-            ctx.fillStyle = marGradient;
-            ctx.fillRect(0, 200, canvas.width, (canvas.height)/2);
-
-
-            //degradado horizontal para el puente
-            const puenteGradient = ctx.createLinearGradient(0, 150, 150, 380);
-            puenteGradient.addColorStop(0, "#DC7633");
-            puenteGradient.addColorStop(1, "#F8C471");
-           
-            //puente
-            ctx.fillStyle = puenteGradient;
-            ctx.fillRect(200, 300, 100, 150);
+    <canvas id="canvas" width="500" height="500"></canvas>
     
-        </script>
-</body>
-</html>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        var tronco = "#FC2117";
+        // degradado horizontal para el mar
+        const marGradient = ctx.createLinearGradient(0, 200, 0, canvas.height);
+        marGradient.addColorStop(0, "#2E3B66");
+        marGradient.addColorStop(1, "#334B9F");
+
+        //mar
+        ctx.fillStyle = marGradient;
+        ctx.fillRect(0, 200, canvas.width, (canvas.height)/2);
+
+
+        // Montañas suavizadas
+        ctx.fillStyle = "#1E8449";
+        ctx.beginPath();
+        ctx.moveTo(0, 200);
+        ctx.quadraticCurveTo(100, 130, 250, 200); // Montaña izquierda
+        ctx.quadraticCurveTo(200, 170, 350, 200); 
+        ctx.quadraticCurveTo(340, 170, 600, 200); // Montaña derecha 
+        ctx.lineTo(200, 200);
+        ctx.lineTo(200, 200);
+        ctx.closePath();
+        ctx.fill();
+        
+        //montaña nueva
+        ctx.fillStyle = "#1E8449";
+        ctx.beginPath();
+        ctx.moveTo(150, 200); 
+        ctx.quadraticCurveTo(200, 120, 290, 200);
+        ctx.lineTo(350, 200); 
+        ctx.lineTo(150, 200); 
+        ctx.closePath();
+        ctx.fill();
+
+        //degradado horizontal para el puente
+        const puenteGradient = ctx.createLinearGradient(100, 150, 150, 380);
+        puenteGradient.addColorStop(0, "#C46323");
+        puenteGradient.addColorStop(1, "#D69A2A");
+        
+        //puente
+        ctx.fillStyle = puenteGradient;
+        ctx.fillRect(210, 300, 90, 150);
+
+        
+        //edificio(puertas torii)
+        //nivel 1(techo)
+        ctx.fillStyle = "black";
+        ctx.fillRect(120, 70, 270, 20);
+        ctx.fillStyle = tronco;
+        ctx.fillRect(120, 90, 270, 20);
+
+        //nivel 2
+        ctx.fillStyle = tronco;
+        ctx.fillRect(120, 120, 270, 20);
+
+        //cuadro
+        ctx.fillStyle = "#E51E15";
+        ctx.fillRect(240, 100, 30, 30);
+        //columnas izquierda
+        ctx.fillStyle = tronco;
+        ctx.fillRect(140,100,20,280);  //medio
+        ctx.fillRect(170,200, 20, 130); //enfrente
+        ctx.fillRect(110, 200, 20, 230); //atras
+
+        //detalles columnas izquierda
+        ctx.fillStyle = "black";
+        ctx.fillRect(170, 190, 20, 10); //enfrente
+        ctx.fillRect(110, 190, 20, 10); //atras
+
+        //columnas derecha
+        ctx.fillStyle = tronco;
+        ctx.fillRect(350, 100, 20, 280); //medio
+        ctx.fillRect(320, 200, 20, 130); //enfrente
+        ctx.fillRect(380, 200, 20, 230); //atras
+
+        //detalles columnas izquierda
+        ctx.fillStyle = "black";
+        ctx.fillRect(320, 190, 20, 10); //enfrente
+        ctx.fillRect(380, 190, 20, 10); //atras
+
+        // Troncos diagonales izquierdos
+        //1
+        ctx.strokeStyle = tronco; 
+        ctx.lineWidth = 10;
+        ctx.beginPath();
+        ctx.moveTo(100, 250);  // Punto de inicio en la columna de atrás
+        ctx.lineTo(200, 220); // Punto en la columna del medio
+        ctx.stroke();
+        ctx.closePath();
+
+        //2
+        ctx.strokeStyle = tronco;
+        ctx.lineWidth = 10;
+        ctx.beginPath();
+        ctx.moveTo(100, 347);  // Punto de inicio en la columna de atrás
+        ctx.lineTo(200, 305); // Punto en la columna del medio
+        ctx.stroke();
+        ctx.closePath();
+
+        //Troncos diagonales derechos
+        //1
+        ctx.strokeStyle = tronco; 
+        ctx.lineWidth = 10;
+        ctx.beginPath();
+        ctx.moveTo(405, 250);  // Punto de inicio en la columna de atrás (derecha)
+        ctx.lineTo(310, 220); // Punto en la columna del medio 
+        ctx.stroke();
+        ctx.closePath();
+
+        //2
+        ctx.beginPath();
+        ctx.moveTo(410, 367);  // Punto de inicio en la columna de atrás (derecha)
+        ctx.lineTo(315, 305); // Punto en la columna del medio
+        ctx.stroke();
+        ctx.closePath();          
+    
+    </script>
+    </body>
+    
+    </html>
+    
+        
