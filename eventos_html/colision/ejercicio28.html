@@ -18,7 +18,7 @@
 <body>
 
     <center>
-        <canvas width=800" height="500" id="myCanvas"></canvas>
+        <canvas width="800" height="500" id="myCanvas"></canvas>
     </center>
 
 
@@ -47,28 +47,30 @@
                     window.setTimeout(callback, 17);
                 };
         }());
-
+        
         document.addEventListener("keydown", (e) => {
-
             switch (e.keyCode) {
                 case 87:
+                case 38:
                     dir = 1;
                     break;
                 case 83:
+                case 40:
                     dir = 2;
                     break;
                 case 68:
+                case 39:
                     dir = 3;
                     break;
                 case 65:
+                case 37:
                     dir = 4;
                     break;
                 case 32:
                     speed += 5;
                     break;
             }
-
-        })
+        });
 
         function update() {
 
@@ -122,6 +124,8 @@
 
         //esta solo pinta
         function paint() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);  
+
             ctx.fillStyle = "white";
             ctx.fillRect(0, 0, 500, 500);
 
