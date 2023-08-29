@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ejercicio 21</title>
+        <style>
+            body {
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: black;
+            }
+        </style>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        var cielo = "#9CD7FE";
+        //cielo
+        ctx.fillStyle = cielo;
+        ctx.fillRect(10,20,canvas.width, canvas.height-50);
+
+        //piso
+        ctx.fillStyle = "#D7BDE2";
+        ctx.fillRect(10,540, canvas.width, 50);
+        //linea divisora
+        ctx.beginPath();
+        ctx.moveTo();
+
+    </script>
+
+    
+</body>
+</html>
