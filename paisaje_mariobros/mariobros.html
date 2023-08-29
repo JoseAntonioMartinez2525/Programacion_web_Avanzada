@@ -27,9 +27,14 @@
         //piso
         ctx.fillStyle = "#D7BDE2";
         ctx.fillRect(10,540, canvas.width, 50);
+
         //linea divisora
+        ctx.lineWidth = 3;
         ctx.beginPath();
-        ctx.moveTo();
+        ctx.moveTo(10,540);
+        ctx.lineTo(canvas.width, 540);
+        ctx.stroke();
+        ctx.closePath();
 
     </script>
 
