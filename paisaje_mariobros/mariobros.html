@@ -15,24 +15,25 @@
         </style>
 </head>
 <body>
-    <canvas id="canvas" width="800" height="600"></canvas>
+    <canvas id="canvas" width="900" height="520"></canvas>
     <script>
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         var cielo = "#9CD7FE";
+        var x = 10;
         //cielo
         ctx.fillStyle = cielo;
-        ctx.fillRect(10,20,canvas.width, canvas.height-50);
+        ctx.fillRect(x,20,canvas.width, canvas.height-50);
 
         //piso
         ctx.fillStyle = "#D7BDE2";
-        ctx.fillRect(10,540, canvas.width, 50);
+        ctx.fillRect(x,canvas.height-80, canvas.width, 50);
 
         //linea divisora
         ctx.lineWidth = 3;
         ctx.beginPath();
-        ctx.moveTo(10,540);
-        ctx.lineTo(canvas.width, 540);
+        ctx.moveTo(x, canvas.height-80);
+        ctx.lineTo(canvas.width, canvas.height - 80);
         ctx.stroke();
         ctx.closePath();
 
