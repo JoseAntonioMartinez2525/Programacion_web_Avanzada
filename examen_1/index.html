@@ -166,6 +166,13 @@
                 Sx += 40;
                 player.x += 40;
             }
+
+            //bomba
+            if (e.which == 'intro' || 13) {
+                //agregar bomba
+                ctx.fillStyle = "orange";
+                ctx.fillText(player.x+1,10, 10);
+            }
             //paint();
 
             //pausa
