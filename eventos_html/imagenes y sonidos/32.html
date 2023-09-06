@@ -119,25 +119,30 @@
                     if (player.y + 50 < 0) {
                         player.y = 550;
                     }
+                    
                 }
                 if (dir == 2) {
                     player.y += speed;
                     if (player.y + 50 > 500) {
                         player.y = -50;
                     }
+                    
                 }
                 if (dir == 3) {
                     player.x += speed;
                     if (player.x + 50 > 500) {
                         player.x = -50;
                     }
+                    
                 }
                 if (dir == 4) {
                     player.x -= speed;
                     if (player.x + 50 < 0) {
                         player.x = 550;
                     }
+                    
                 }
+                sonido.play();
 
                 if (player.seTocan(target)) {
                     target.x = randomInteger(460);
@@ -173,7 +178,7 @@
             window.requestAnimationFrame(update);
         }
 
-        // Esta función solo pinta
+       
         function paint() {
             ctx.fillStyle = "white";
             ctx.fillRect(0, 0, 500, 500);
@@ -182,7 +187,7 @@
             ctx.fillStyle = "black";
             ctx.fillText("score: " + score, 5, 20);
 
-            // Pinta la imagen en lugar del cuadro de colores aleatorios
+            // imagen
             ctx.drawImage(image, player.x, player.y, player.w, player.h);
 
             target.paint(ctx);
