@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programación con Vue</title>
+    <style>
+        body {
+            background-color: #86C17B;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="container_app">
+        <!-- Contador de clics -->
+        <button @click="incrementCount">Click me {{ count }}</button><br><br>
+
+        <!-- Saludo-->
+        <input type="text" v-model="name" placeholder="nombre"><br><br>
+        <h1>Hola, {{ name }}</h1>
+
+        <!-- Suma de dos números -->
+        <input type="text" v-model="num1" placeholder="Número 1"><br><br>
+        <input type="text" v-model="num2" placeholder="Número 2"><br><br>
+        <button @click="suma">Sumar</button>
+
+        <h1>Resultado: {{ result }}</h1>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const { createApp, ref } = Vue
+
+        createApp({
+            setup() {
+                // Variables 
+                const count = ref(0);
+                const name = ref('');
+                const num1 = ref(0);
+                const num2 = ref(0);
+                const result = ref(0);
+
+
+                //incrementar el contador
+                const incrementCount = () => {
+                    count.value += 1;
+                }
+
+                // Método para sumar dos números
+                const suma = () => {
+                    result.value = parseFloat(num1.value) + parseFloat(num2.value);
+                }
+
+                return {
+                    count,
+                    name,
+                    num1,
+                    num2,
+                    result,
+                    incrementCount,
+                    suma
+                }
+            }
+        }).mount('#container_app')
+    </script>
+</body>
+
+</html>
