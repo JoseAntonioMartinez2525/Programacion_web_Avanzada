@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programacion en VUE, ejercicio 7</title>
+    <style>
+        body {
+            background-color: #86C17B;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            margin-top: 100px;
+        }
+
+
+        #save {
+            width: 200px;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container" id="container_app">
+        <!-- Contador de clics 
+        <button @click="incrementCount">Count is: {{ count }}</button><br><br>
+
+        Saludo con input y v-model
+        <input type="text" v-model="name" placeholder="Tu nombre"><br><br>
+        <h1>Hola, {{ name }}</h1>
+
+        Suma de dos números 
+        <input type="text" v-model="num1" placeholder="Número 1"><br><br>
+        <input type="text" v-model="num2" placeholder="Número 2"><br><br>
+        <button @click="sumNumbers">Sumar</button>
+
+        <h1>Resultado: {{ result }}</h1>
+
+        <Lista de elementos -->
+        <h2>Lista de elementos:</h2>
+        <ul>
+            <li v-for="(person, index) in people">
+                {{ person.name }} : {{ person.lastName }}
+            </li>
+        </ul>
+
+        <!-- Formulario para agregar elemento -->
+        <h2>Agregar elemento: </h2>
+
+        <!--Crear Formulario-->
+        <form action="">
+            <fieldset>
+                <legend>
+                    Nombre(s)
+                </legend>
+                <input type="text" v-model="username" placeholder="escriba aquí">
+            </fieldset>
+
+            <fieldset>
+                <legend>
+                    Apellido(s)
+                </legend>
+                <input id="lastname" type="text" v-model="lastName" placeholder="escriba aquí">
+            </fieldset>
+        </form>
+        <button id="save" @click="saveData">Guardar</button>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="text/javascript">
+        const { createApp, ref } = Vue
+
+        createApp({
+            setup() {
+                const count = ref(0);
+                const name = ref('');
+                const num1 = ref(0);
+                const num2 = ref(0);
+                const result = ref(0);
+                const people = ref([]);
+                const username = ref('');
+                const lastName = ref('');
+
+                // Método para incrementar el contador
+                function incrementCount() {
+                    count.value += 1;
+                }
+
+                // Método para sumar dos números
+                function sumNumbers() {
+                    result.value = parseFloat(num1.value) + parseFloat(num2.value);
+                }
+
+                // Método para agregar una persona a la lista
+                function saveData() {
+                    if (username.value.trim() !== '' && lastName.value.trim() !== '') {
+                        people.value.push({ name: username.value, lastName: lastName.value });
+                        username.value = '';
+                        lastName.value = '';
+                    }
+                }
+
+                return {
+                    count,
+                    name,
+                    num1,
+                    num2,
+                    result,
+                    people,
+                    username,
+                    lastName,
+                    incrementCount,
+                    sumNumbers,
+                    saveData
+                }
+            }
+        }).mount('#container_app')
+    </script>
+</body>
+
+</html>
