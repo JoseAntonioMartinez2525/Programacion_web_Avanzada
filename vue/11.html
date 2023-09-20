@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 11 de Vue.js - Realiza un login utilizando un json local haciendo uso de map, fetch</title>
+    <style>
+        body {
+            background-color: gray;
+        }
+
+        fieldset {
+            width: fit-content;
+            border-color: azure;
+            color: azure;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container_app">
+        <form v-if="!loggedIn">
+            <fieldset>
+                <legend>Email</legend>
+                <input type="text" v-model="email" placeholder="Escribe tu email">
+            </fieldset>
+            <fieldset>
+                <legend>Password</legend>
+                <input type="password" v-model="password" placeholder="Escribe tu contraseña"
+                    autocomplete="current-password">
+            </fieldset><br>
+            <button @click.prevent="login">Acceder</button>
+        </form>
+        <div v-if="loggedIn">
+            <p>Bienvenido, {{ username }}</p>
+            <button @click="logout">Cerrar Sesión</button>
+        </div>
+
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+
+        const app = Vue.createApp({
+            setup() {
+                return {
+                    email: '',
+                    password: '',
+                    loggedIn: false,
+                    username: '',
+                    users: [] 
+                };
+            },
+            created() {
+                this.fetchUsers(); 
+            },
+            methods: {
+                async fetchUsers() {
+                    // Obtener la lista de usuarios desde localStorage si existe, de lo contrario, cargar desde JSON
+                    const storedUsers = localStorage.getItem('users');
+                    if (storedUsers) {
+                        this.users = JSON.parse(storedUsers);
+                    } else {
+                        const response = await fetch('json/users.json');
+                        this.users = await response.json();
+                        localStorage.setItem('users', JSON.stringify(this.users));
+                    }
+                },
+                login() {
+                    // Buscar un usuario que coincida con el email y contraseña ingresados
+                    const user = this.users.find(u => u.email === this.email && u.password === this.password);
+
+                    if (user) {
+                        // Autenticación exitosa
+                        this.loggedIn = true;
+                        this.username = user.name;
+
+                        // Mostrar información de todos los usuarios permitidos utilizando map
+                        console.log("Usuarios permitidos: ");
+                        this.users.map(u => {
+                            console.log('id: ', u.id, 'Nombre:', u.name, 'Email:', u.email);
+                        });
+
+                        alert('Bienvenido, ' + this.username);
+                        
+                        window.location.href = 'sesion.html';
+                    } else {
+                        // Autenticación fallida
+                        alert('Credenciales incorrectas. Inténtalo de nuevo.');
+                    }
+                },
+                logout() {
+                    this.email = '';
+                    this.password = '';
+                    this.loggedIn = false;
+                    this.username = '';
+                }
+            }
+        })
+
+            .mount('#container_app');
+    </script>
+</body>
+
+</html>
