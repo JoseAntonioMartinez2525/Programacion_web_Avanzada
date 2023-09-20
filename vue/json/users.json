@@ -1,0 +1,25 @@
+[
+    {   "id": 1,
+        "email": "john.smith@gmail.com",
+        "password": "123a",
+        "name": "john smith"
+    },
+    {   "id": 2,
+        "email": "jane.smith@gmail.com",
+        "password": "111b",
+        "name": "jane smit"
+    },
+    {   "id": 3,
+        "email": "daniel3@outlook.com",
+        "password": "333c",
+        "name": "daniel 3"
+    },
+    {
+    "id": 4,
+    "email": "Sincere@april.biz",
+     "password": "asd1", 
+     "name": "Romaguera-Crona"
+
+    }
+  
+]

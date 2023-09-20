@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 12 de Vue.js_Crea un inicio de sesión utilizando un json, fetch y map</title>
+    <style>
+        body {
+            background-color: gray;
+        }
+
+        fieldset {
+            width: fit-content;
+            border-color: azure;
+            color: azure;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container_app">
+        <form v-if="!loggedIn">
+            <fieldset>
+                <legend>Email</legend>
+                <input type="text" v-model="email" placeholder="Escribe tu email">
+            </fieldset>
+            <fieldset>
+                <legend>Password</legend>
+                <input type="password" v-model="password" placeholder="Escribe tu contraseña"
+                    autocomplete="current-password">
+            </fieldset><br>
+            <button @click.prevent="login"> Acceder</button>
+        </form>
+        <div v-if="loggedIn">
+            <p>Bienvenido, {{ username }}</p>
+            <button @click="logout">Cerrar Sesión</button>
+        </div>
+
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+
+        const app = Vue.createApp({
+            setup() {
+                return {
+                    email: '',
+                    password: '',
+                    loggedIn: false,
+                    username: ''
+                };
+            },
+            methods: {
+                async login() {
+                    // archivo JSON local con los usuarios
+                    const response = await fetch('json/users.json');
+                    const users = await response.json();
+
+                    // Buscar un usuario que coincida con el email y contraseña ingresados
+                    const user = users.find(u => u.email === this.email && u.password === this.password);
+
+                    // Mostrar información de todos los usuarios permitidos utilizando map
+                    console.log("Usuarios permitidos: ")
+                    users.map(u => {
+                        console.log('id: ', u.id, 'Nombre:', u.name, 'Email:', u.email);
+                    });
+                    if (user) {
+                        // Autenticación exitosa
+                        this.loggedIn = true;
+                        this.username = user.name;
+
+                        alert('Bienvenido, ' + this.username);
+                        //redirigir a nueva pág.
+                        window.location.href = 'sesion.html';
+                    } else {
+                        // Autenticación fallida
+                        alert('Credenciales incorrectas. Inténtalo de nuevo.');
+                    }
+                },
+                logout() {
+                    this.email = '';
+                    this.password = '';
+                    this.loggedIn = false;
+                    this.username = '';
+                }
+            }
+        })
+
+            .mount('#container_app');
+    </script>
+</body>
+
+</html>
