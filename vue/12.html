@@ -60,16 +60,18 @@
                     // Buscar un usuario que coincida con el email y contraseña ingresados
                     const user = users.find(u => u.email === this.email && u.password === this.password);
 
-                    // Mostrar información de todos los usuarios permitidos utilizando map
-                    console.log("Usuarios permitidos: ")
-                    users.map(u => {
-                        console.log('id: ', u.id, 'Nombre:', u.name, 'Email:', u.email);
-                    });
+
                     if (user) {
                         // Autenticación exitosa
                         this.loggedIn = true;
                         this.username = user.name;
 
+                        // Mostrar información de todos los usuarios permitidos utilizando map
+                        console.log("Usuarios permitidos: ")
+                        users.map(u => {
+                            console.log('id: ', u.id, 'Nombre:', u.name, 'Email:', u.email);
+                        });
+                        
                         alert('Bienvenido, ' + this.username);
                         //redirigir a nueva pág.
                         window.location.href = 'sesion.html';
