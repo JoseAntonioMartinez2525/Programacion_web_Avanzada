@@ -56,7 +56,7 @@
 
         </div>
     </div>
-
+    
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
         const app = Vue.createApp({
@@ -73,7 +73,7 @@
             methods: {
                 async loadUserData() {
                     try {
-                        const response = await fetch('users.json');
+                        const response = await fetch('json/users.json');
                         if (!response.ok) {
                             throw new Error('No se pudo cargar users.json');
                         }
@@ -100,9 +100,45 @@
 
                         alert('Bienvenido, ' + this.username);
                         this.generateTable();
+
+                        setTimeout(this.showAllUsersTable, 1000);
                     } else {
                         // Autenticación fallida
                         alert('Credenciales incorrectas. Inténtalo de nuevo.');
+                    }
+                },
+                async showAllUsersTable() {
+                    // Crear y mostrar la tabla de todos los usuarios registrados
+                    const table = document.createElement('table');
+                    table.classList.add('custom-table');
+                    table.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Teléfono</th>
+                            <th>Email</th>
+                            <th>Dirección</th>
+                            <th>Compañía</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${this.users.map((user, index) => `
+                            <tr key="${index}">
+                                <td>${user.name}</td>
+                                <td>${user.phone}</td>
+                                <td>${user.email}</td>
+                                <td>${user.address}</td>
+                                <td>${user.company}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                `;
+                    const existingTable = document.querySelector('table');
+                    if (existingTable) {
+                        existingTable.replaceWith(table);
+                    } else {
+                        const container = document.querySelector('#container_app');
+                        container.appendChild(table);
                     }
                 },
                 async generateTable() {
@@ -121,6 +157,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        
                         ${this.filteredUsers.map((user, index) => `
                             <tr key="${index}">
                                 <td>${user.name}</td>
@@ -130,6 +167,7 @@
                                 <td>${user.company}</td>
                             </tr>
                         `).join('')}
+                        
                     </tbody>
                 `;
 
