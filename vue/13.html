@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VUE_13.- Mostrar los registros del json en la tabla con un v-for</title>
+    <style>
+        body {
+            background-color: gray;
+        }
+
+        fieldset {
+            width: fit-content;
+            border-color: azure;
+            color: azure;
+        }
+
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .custom-table th,
+        .custom-table td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .custom-table th {
+            background-color: #ccc;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container_app">
+        <form v-if="!loggedIn">
+            <fieldset>
+                <legend>Email</legend>
+                <input type="text" v-model="email" placeholder="Escribe tu email" autocomplete="username">
+            </fieldset>
+            <fieldset>
+                <legend>Password</legend>
+                <input type="password" v-model="password" placeholder="Escribe tu contraseña"
+                    autocomplete="current-password">
+            </fieldset><br>
+            <button @click.prevent="login">Acceder</button>
+        </form>
+        <div v-if="loggedIn">
+            <p>Bienvenido, {{ username }}</p>
+            <button @click="logout">Cerrar Sesión</button>
+
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            setup() {
+                return {
+                    email: '',
+                    password: '',
+                    loggedIn: false,
+                    username: '',
+                    users: [],
+                    filteredUsers: []
+                };
+            },
+            methods: {
+                async loadUserData() {
+                    try {
+                        const response = await fetch('users.json');
+                        if (!response.ok) {
+                            throw new Error('No se pudo cargar users.json');
+                        }
+                        return await response.json();
+                    } catch (error) {
+                        console.error(error);
+                        return [];
+                    }
+                },
+                async login() {
+                    
+                    this.users = await this.loadUserData();
+
+                    // Buscar un usuario que coincida con el email y contraseña ingresados
+                    const user = this.users.find(u => u.email === this.email && u.password === this.password);
+
+                    if (user) {
+                      
+                        this.loggedIn = true;
+                        this.username = user.name;
+
+                        // usuarios que coinciden con el usuario autenticado
+                        this.filteredUsers = this.users.filter(u => u.email === user.email);
+
+                        alert('Bienvenido, ' + this.username);
+                        this.generateTable();
+                    } else {
+                        // Autenticación fallida
+                        alert('Credenciales incorrectas. Inténtalo de nuevo.');
+                    }
+                },
+                async generateTable() {
+
+                    const table = document.createElement('table');
+
+                    table.classList.add('custom-table');
+                    table.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Teléfono</th>
+                            <th>Email</th>
+                            <th>Dirección</th>
+                            <th>Compañía</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${this.filteredUsers.map((user, index) => `
+                            <tr key="${index}">
+                                <td>${user.name}</td>
+                                <td>${user.phone}</td>
+                                <td>${user.email}</td>
+                                <td>${user.address}</td>
+                                <td>${user.company}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                `;
+
+                    const existingTable = document.querySelector('table');
+                    if (existingTable) {
+                        existingTable.replaceWith(table);
+                    } else {
+                        const container = document.querySelector('#container_app');
+                        container.appendChild(table);
+                    }
+                },
+            },
+        }).mount('#container_app');
+    </script>
+</body>
+
+</html>

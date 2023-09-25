@@ -1,25 +1,42 @@
 [
-    {   "id": 1,
-        "email": "john.smith@gmail.com",
-        "password": "123a",
-        "name": "john smith"
-    },
-    {   "id": 2,
-        "email": "jane.smith@gmail.com",
-        "password": "111b",
-        "name": "jane smit"
-    },
-    {   "id": 3,
-        "email": "daniel3@outlook.com",
-        "password": "333c",
-        "name": "daniel 3"
-    },
-    {
-    "id": 4,
-    "email": "Sincere@april.biz",
-     "password": "asd1", 
-     "name": "Romaguera-Crona"
-
-    }
-  
+	{
+		"name": "Chava Mccray",
+		"phone": "1-954-547-1631",
+		"email": "lorem.lorem.luctus@icloud.ca",
+		"address": "Ap #171-9639 Et Road",
+		"password": "bzg18g",
+		"company": "Est Mauris Inc."
+	},
+	{
+		"name": "Nevada Conner",
+		"phone": "1-855-706-1763",
+		"email": "quis.massa.mauris@aol.com",
+		"address": "579-8535 Eu Street",
+		"password": "ekm84b",
+		"company": "Urna Company"
+	},
+	{
+		"name": "Wayne Jenkins",
+		"phone": "(323) 866-3116",
+		"email": "ac.risus@icloud.org",
+		"address": "657-9084 Vulputate Av.",
+		"password": "nfd37a",
+		"company": "Mollis Dui Ltd"
+	},
+	{
+		"name": "Elizabeth Kane",
+		"phone": "(570) 365-5221",
+		"email": "aliquam@yahoo.edu",
+		"address": "318-2184 Aliquam Rd.",
+		"password": "vik86m",
+		"company": "Nascetur Ridiculus Foundation"
+	},
+	{
+		"name": "Jacqueline Howell",
+		"phone": "1-682-673-7771",
+		"email": "diam.luctus@hotmail.com",
+		"address": "Ap #516-5912 Ipsum St.",
+		"password": "tzh51o",
+		"company": "Velit Consulting"
+	}
 ]
