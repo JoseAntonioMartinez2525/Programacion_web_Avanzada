@@ -196,21 +196,35 @@
 
                 },
                 save() {
+                    if(this.action=='new'){
+                        this.new_record.company = [];
+                        this.new_record.company.name = this.new_record.company_name;
 
-                    this.new_record.company = [];
-                    this.new_record.company.name = this.new_record.company_name;
+                        this.new_record.address = [];
+                        this.new_record.address.street = this.new_record.street;
 
-                    this.new_record.address = [];
-                    this.new_record.address.street = this.new_record.street;
+                        const fecha = new Date();
+                        this.new_record.id = fecha.getMilliseconds();
 
-                    const fecha = new Date();
-                    this.new_record.id = fecha.getMilliseconds();
+                        this.users.push(this.new_record);
 
-                    this.users.push(this.new_record);
+                        this.new_record = [];
+                        this.action = '';
+                        alert("Registro completado correctamente");
+                    }
+                    else if(this.action == 'update'){
+                        this.users.forEach((user)=>{
+                            if(user.id == this.new_record.id){
+                                user.name = this.new_record.name;
+                                user.email = this.new_record.email;
+                                user.address.street = this.new_record.street;
+                                user.company.name = this.new_record.company_name;
+                            }
+                        })
+                        this.action = '';
+                        alert("Dato actualizado correctamente");
 
-                    this.new_record = [];
-                    this.action = '';
-                    alert("Registro completado correctamente");
+                    }
                 },
                 delete_item(id){
                     let target = 0; 
