@@ -1,0 +1,4 @@
+API key: 98889f0b373adb5db5d857c612fd38ea
+
+Token de acceso de lectura a la API
+eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ODg4OWYwYjM3M2FkYjVkYjVkODU3YzYxMmZkMzhlYSIsInN1YiI6IjY1MTRiNzg1OTNiZDY5MDExYjhjMWE3YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.c2yWsF5WIwe_KghBB10OhjsrWx9cxiw1vCdd1Cy5sw8
