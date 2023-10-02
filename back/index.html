@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../public/css/styles.css">
+    <script type="module" src="../public/script/index.js"></script>
+</head>
+<body>
+<section class="forms-section">
+    <h1 class="section-title">Forms</h1>
+    <div class="forms">
+        <div id="app" class="form-wrapper is-active">
+            <button type="button" class="switcher switcher-login">
+                Sign in
+                <span class="underline"></span>
+            </button>
+            <form action="#" @submit.prevent="login" class="form form-login">
+                <fieldset>
+                    <legend>Please, enter your email and password for login.</legend>
+                    <div class="input-block">
+                        <label for="login-email">E-mail</label>
+                        <input id="login-email" type="email" required>
+                    </div>
+                    <div class="input-block">
+                        <label for="login-password">Password</label>
+                        <input id="login-password" type="password" required autocomplete="username">
+                    </div>
+                </fieldset>
+                <button type="submit" class="btn-login">Login</button>
+            </form>
+        </div>
+        <div class="form-wrapper">
+            <button type="button" class="switcher switcher-signup">
+                Sign Up
+                <span class="underline"></span>
+            </button>
+            <form class="form form-signup">
+                <fieldset>
+                    <legend>Please, enter your email, password and password confirmation for sign up.</legend>
+                    <div class="input-block">
+                        <label for="signup-email">E-mail</label>
+                        <input id="signup-email" type="email" required>
+                    </div>
+                    <div class="input-block">
+                        <label for="signup-password">Password</label>
+                        <input id="signup-password" type="password" required autocomplete="password">
+                    </div>
+                    <div class="input-block">
+                        <label for="signup-password-confirm">Confirm password</label>
+                        <input id="signup-password-confirm" type="password" required autocomplete="password">
+                    </div>
+                </fieldset>
+                <button type="submit" class="btn-signup">Continue</button>
+            </form>
+        </div>
+    </div>
+</section>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+    const { createApp, ref } = Vue
+
+    createApp({
+        setup() {
+            const message = ref('Hello vue!')
+            return {
+                message
+            }
+        },
+        methods:{
+            async login()
+            {
+                console.log("Hola");
+                var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+                myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ODg4OWYwYjM3M2FkYjVkYjVkODU3YzYxMmZkMzhlYSIsInN1YiI6IjY1MTRiNzg1OTNiZDY5MDExYjhjMWE3YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.c2yWsF5WIwe_KghBB10OhjsrWx9cxiw1vCdd1Cy5sw8");
+
+                var raw = JSON.stringify({
+                    "username": "joma_18",
+                    "password": "sakura25",
+                    "request_token": ""
+                });
+
+                var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: 'follow'
+                };
+                /*const response = await fetch("https://api.themoviedb.org/3/authentication/token/validate_with_login");
+                let respuesta = await response.json();
+
+                console.log(response.sucess)*/
+                fetch("https://api.themoviedb.org/3/authentication/token/validate_with_login", requestOptions)
+                    .then(response => response.json())
+                    .then(result => {
+                        console.log(result)
+                        console.log(result.success)
+                    })
+                    .catch(error => console.log('error', error)); 
+
+                return false;
+            }
+        }
+    }).mount('#app')    
+</script>
+</body>
+</html>

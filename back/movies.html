@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+<link rel="stylesheet" href="../public/css/cards.css">
+</head>
+<body>
+<div class="main" id="app">
+    <h1>List of Movies</h1>
+    <ul class="cards">
+        <li class="cards_item" v-for="m in movies">
+            <div class="card">
+                <div class="card_image"><img src="https://picsum.photos/500/300/?image=10"></div>
+                <div class="card_content">
+                    <h2 class="card_title">{{m.original_title}}</h2>
+                    <p class="card_text">{{m.overview}}</p>
+                    <button class="btn card_btn">Read More</button>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<h3 class="made_by">Made with ♡</h3>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script type="text/javascript" >
+    const { createApp, ref } = Vue
+
+    createApp({
+        setup() {
+            const message = ref('Hello vue!')
+            const movies = ref([])
+            return {
+                message,
+                movies
+            }
+        },
+        async mounted() {
+            
+            const update = async () => {
+                var myHeaders = new Headers();
+                myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ODg4OWYwYjM3M2FkYjVkYjVkODU3YzYxMmZkMzhlYSIsInN1YiI6IjY1MTRiNzg1OTNiZDY5MDExYjhjMWE3YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.c2yWsF5WIwe_KghBB10OhjsrWx9cxiw1vCdd1Cy5sw8");
+
+                var requestOptions = {
+                    method: 'GET',
+                    headers: myHeaders,
+                    redirect: 'follow'
+                };
+
+                fetch("https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc", requestOptions)
+                    .then(response => response.json())
+                    .then(result => {
+                        console.log(result)
+                        this.movies = result.results
+                    })
+                    .catch(error => console.log('error', error));
+
+
+            }
+            update()
+        },        
+        methods: {
+        }
+    }).mount('#app')  
+</script>
+</body>
+</html>
