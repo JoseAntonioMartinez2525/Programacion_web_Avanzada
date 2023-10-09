@@ -86,6 +86,7 @@
             localStorage.setItem('userData', JSON.stringify(userData)); 
             this.users.push(userData);
 
+            console.log("registro Exitoso")
 
 
             alert('Registro exitoso. Puedes iniciar sesión ahora.');
@@ -119,34 +120,40 @@
                     "request_token": ""
                 };
 
-                var myHeaders = new Headers();
-                myHeaders.append("Content-Type", "application/json");
-                myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ODg4OWYwYjM3M2FkYjVkYjVkODU3YzYxMmZkMzhlYSIsInN1YiI6IjY1MTRiNzg1OTNiZDY5MDExYjhjMWE3YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.c2yWsF5WIwe_KghBB10OhjsrWx9cxiw1vCdd1Cy5sw8");
+                var config = {
+                method: 'post',
+                url: 'https://api.themoviedb.org/3/authentication/token/validate_with_login',
+                headers: {
+                    Authorization:
+                        'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ODg4OWYwYjM3M2FkYjVkYjVkODU3YzYxMmZkMzhlYSIsInN1YiI6IjY1MTRiNzg1OTNiZDY5MDExYjhjMWE3YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.c2yWsF5WIwe_KghBB10OhjsrWx9cxiw1vCdd1Cy5sw8',
+                },
+                loginData,
+            };
 
-                var raw = JSON.stringify(loginData);
-
-                var requestOptions = {
-                    method: 'POST',
-                    headers: myHeaders,
-                    body: raw,
-                    redirect: 'follow'
-                };
-                    fetch("https://api.themoviedb.org/3/authentication/token/validate_with_login", requestOptions)
-                    .then(response => response.json())
-                    .then(result => {
-                        console.log(result)
-                        console.log(result.success)
+                axios.post('https://api.themoviedb.org/3/authentication/token/validate_with_login', loginData, {
+                    headers: {
+                        Authorization: 'Bearer tu_token_de_autorizacion', // Reemplaza con tu token de autorización
+                        'Content-Type': 'application/json',
+                    },
+                })
+                    .then(function (response) {
+                        if (response.data.success) {
+                            window.location.href = 'movies.html';
+                        }
                     })
-                    .catch(error => console.log('error', error));
-                    if (userFound) {
-                    alert('Inicio de sesión exitoso.');
-                }
-            } else {
-                alert('Usuario no encontrado. Regístrate primero.');
-            }
+                    .catch(function (error) {
+                        // Manejo de errores
+                        alert('Usuario o Contraseña incorrecta');
+                        console.log(error);
+                    });
 
-            return false;
-        }
+          
+            };
+
+            
+
+
+        },
     }
     }).mount('#app')    
 </script>

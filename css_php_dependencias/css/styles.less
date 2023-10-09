@@ -1,0 +1,51 @@
+@primary-color: #007BFF;
+@secondary-color: #333;
+@font-family: Arial, sans-serif;
+
+.login-container {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+
+    h2 {
+        color: @primary-color;
+        font-size: 24px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: @secondary-color;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: @font-family;
+        }
+    }
+
+    button {
+        background-color: @primary-color;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: darken(@primary-color, 10%);
+        }
+    }
+}
