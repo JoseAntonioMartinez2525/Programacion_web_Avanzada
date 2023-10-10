@@ -57,8 +57,8 @@
 
                 async login() {
                     const userEmail = document.querySelector('input[type="email"]').value;
-                    alert('Bienvenido, tu email es: ' + userEmail);
-
+                    alert('Bienvenido, ' + userEmail);
+                    document.body.innerHTML = '';
                     var myHeaders = new Headers();
                     myHeaders.append("Content-Type", "application/json");
 
